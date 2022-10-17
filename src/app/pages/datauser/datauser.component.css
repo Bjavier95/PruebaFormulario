@@ -1,0 +1,13 @@
+.col1 {
+    background: grey;
+    width: 15%;
+ }
+ .col2 {
+    border: white;
+    background: grey;
+    width: 85%;
+ }
+ .row {
+   display: flex;
+   width: 100%;
+ }

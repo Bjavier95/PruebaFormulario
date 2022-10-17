@@ -1,1 +1,348 @@
-<p>datauser works!</p>
+<mat-horizontal-stepper>
+    <mat-step label="Datos del usuario">
+        <div [ngStyle]="{'width':'100%'}" class="row justify-content-center">
+            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardarForm1()" style="width: 80%;">
+                <div class="form-group row">
+                  <label [ngStyle]="{'width':'18%'}">Nombre
+                    <span class="text-danger font-weight-bold">*</span>
+                  </label>
+                  <div class="col-8">            
+                    <input class="form-control"
+                           type="text"
+                           placeholder="Nombre"
+                           formControlName="nombre"
+                           id="nombreusuario"
+                           [class.is-invalid]="nombreNoValido"
+                           (change)="validarBotonSiguiente();">
+                    <small *ngIf="nombreNoValido" class= "text-danger">Ingrese un nombre</small>
+                  </div>
+                </div>  
+
+                <br>
+
+                
+                <div class="form-group row">
+                  <label class="col-2 col-form-label" [ngStyle]="{'width':'18%'}">Nit
+                    <span class="text-danger font-weight-bold">*</span>
+                  </label>
+                  <div class="col-8">
+                    
+                    <input class="form-control"
+                    type="text"
+                    placeholder="Nit"
+                    id="nit"
+                    formControlName="nit"
+                    [class.is-invalid]="nitNoValido"
+                    (change)="validarBotonSiguiente();">
+                    <small *ngIf="nitNoValido" class= "text-danger">Ingrese un nit</small>
+                  </div>
+                </div> 
+                
+                <br>
+                
+                <div class="form-group row">
+                  <label class="col-2 col-form-label" [ngStyle]="{'width':'18%'}">Pais
+                    <span class="text-danger font-weight-bold">*</span>
+                  </label>                    
+                  <div class="col-8">              
+                      <select class="form-control" id="pais"  (change)="validarBotonSiguiente(); setMoneda();">
+                              <option value="" selected>Seleccione un pais</option>
+                          <option *ngFor="let c of paises" value="{{c.idPais}}">{{c.descripcion}}</option>
+                    </select>
+                    <small *ngIf="paisNoValido" class= "text-danger">Seleccione un pais</small>
+                  </div>
+                </div> 
+
+              <br>
+                  <div class="form-group row" formGroupName="ubicaciones">
+                    <strong class="row justify-content-center">UBICACIONES</strong>
+
+                    <div class="form-group row">
+                            <label [ngStyle]="{'width':'18%'}">Departamento
+                              <span class="text-danger font-weight-bold">*</span>
+                            </label>
+                            <div [ngStyle]="{'width':'68%'}">
+                                <select class="form-control" id="depto"  (change)="validarBotonSiguiente();">
+                                <option value="" selected>Seleccione un departamento</option>
+                                <option *ngFor="let c of departamentos" value="{{c}}">{{c.descripcion}}</option>
+                              </select>
+                              <small *ngIf="departamentoNoValido" class= "text-danger">Seleccione un departamento</small>
+                            </div>
+                          </div>  
+
+                      <br>
+                      <br>
+                      <br>
+
+                     <div class="form-group row">
+                            <label  [ngStyle]="{'width':'18%'}">Ciudad
+                              <span class="text-danger font-weight-bold">*</span>
+                            </label>
+                            <div  [ngStyle]="{'width':'68%'}">
+                                <select class="form-control" id="ciudad"  (change)="validarBotonSiguiente();">
+                                <option value="" selected disabled>Seleccione una ciudad</option>
+                                <option *ngFor="let c of ciudades" value="{{c}}">{{c.descripcion}}</option>
+                              </select>
+                              <small *ngIf="ciudadNoValida" class= "text-danger">Seleccione una Ciudad</small>
+                            </div>
+                     </div> 
+             </div>
+
+             <br>
+
+                <div class="form-group row" formGroupName="direcciones">
+                    <strong class="row justify-content-center">DIRECCIONES</strong>
+                          <div class="form-group row">
+                            <label  [ngStyle]="{'width':'18%'}">Tipo de dirección
+                              <span class="text-danger font-weight-bold">*</span>
+                            </label>
+                            <div  [ngStyle]="{'width':'68%'}">
+                                <select class="form-control input-peque" id="tipoDir"  (change)="validarBotonSiguiente();">
+                                <option value="" selected disabled>Seleccione un tipo de dirección</option>
+                                <option *ngFor="let c of tipoDirecciones" value="{{c}}">{{c.descripcion}}</option>
+                              </select>
+                              <small *ngIf="ciudadNoValida" class= "text-danger">Seleccione un tipo de dirección</small>
+                            </div>
+                          </div> 
+                      </div> 
+
+                      <br>
+                      <div class="form-group row" formGroupName="direcciones">
+                          <label  [ngStyle]="{'width':'17%'}">Descripción
+                            <span class="text-danger font-weight-bold">*</span>
+                          </label>
+                          <div  [ngStyle]="{'width':'67%'}">
+                            <textarea class="form-control" [ngStyle]="{'resize':'none'}"
+                            type="text"
+                            placeholder="Descripción"
+                            id="descripcion"
+                            formControlName="descripcion"
+                            [class.is-invalid]="descripcionNoValida"
+                            (change)="validarBotonSiguiente();">
+                            </textarea>
+                            <small *ngIf="ciudadNoValida" class= "text-danger">Agregue una descripción</small>
+                          </div>
+                        </div> 
+            <br>   
+            <button mat-button matStepperNext [disabled]="!this.botones.botonSiguiente1.estado" 
+                    class="btn btn-outline-primary btn-block" style=" margin-left: 35%;"
+                    type="submit" > Siguiente </button>
+            </form>    
+            <br>
+    </div> 
+        
+    </mat-step>
+    
+    <mat-step label="Piezas" completed="false">   
+      <div class="col-5 mx-auto" [ngStyle]="{'width':'100%'}" class="row justify-content-center">
+        <form autocomplete="off"
+             [formGroup]="forma2" 
+             [ngStyle]="{'width':'80%'}"
+             (ngSubmit)="guardarForm2()">
+
+          <div class="form-group row">
+            <label  [ngStyle]="{'width':'24%'}">Descripción  <span class="text-danger font-weight-bold">*</span>
+            </label>
+            <div  [ngStyle]="{'width':'67%'}">
+              <textarea class="form-control" [ngStyle]="{'resize':'none'}"
+              type="text"
+              placeholder="Descripción"
+              formControlName="descripcionPieza"
+              id="descPieza"
+              (change)="validarBotonSiguienteForm2();"
+              [class.is-invalid]="descripcionPiezaNoValida">
+              </textarea>
+              <small *ngIf="descripcionPiezaNoValida" class= "text-danger">Agregue una descripción</small>
+            </div>
+          </div> 
+
+          <br>
+        
+          <div class="form-group row">
+            <label  [ngStyle]="{'width':'24%'}">Cantidad
+              <span class="text-danger font-weight-bold">*</span></label>
+              <div  [ngStyle]="{'width':'67%'}">        
+                <input class="form-control"
+                       type="number"
+                       placeholder=""
+                       min="1" 
+                       pattern="^[0-9]+"
+                       formControlName="cantidad"
+                       id="cant"
+                       (change)="validarBotonSiguienteForm2(); calcularTotal();"
+                       [class.is-invalid]="cantidadNoValida">
+                <small *ngIf="cantidadNoValida" class= "text-danger">Ingrese una cantidad</small>
+              </div>
+            </div> 
+
+            <br>
+
+            
+            <div class="form-group row">
+              <label  [ngStyle]="{'width':'24%'}">Precio Unitario  <span class="text-danger font-weight-bold">*</span>
+              </label>
+              <div  [ngStyle]="{'width':'67%'}">        
+                <input class="form-control"
+                       type="number"
+                       placeholder=""
+                       min="1" 
+                       pattern="^[0-9]+"
+                       formControlName="precioUnitario"
+                       id="precioUni"
+                       (change)="validarBotonSiguienteForm2(); calcularTotal(); "
+                       
+                       [class.is-invalid]="precioUnitarioNoValido">
+                <small *ngIf="precioUnitarioNoValido" class= "text-danger">Ingrese un precio unitario</small>
+              </div>
+            </div> 
+          
+            <br>
+
+            <div class="form-group row" disabled>
+              <label [ngStyle]="{'width':'27%'}">Total  <span class="text-danger font-weight-bold">*</span>
+              </label>
+              <div [ngStyle]="{'width':'67%'}" *ngIf="val">   
+                <h3>
+                  <p *ngIf="moneda==1" >{{valTotal | currency: 'COP'}}</p>  
+                  <p *ngIf="moneda==2" >{{valTotal | currency: 'PAB'}}</p>   
+                  <p *ngIf="moneda==3" >{{valTotal | currency: 'CLP'}}</p>   
+                </h3>  
+              </div>
+            </div> 
+
+            <br>
+           
+           
+            <button type="submit" class="btn btn-primary mt-3" 
+                    [disabled]="!this.botones.botonSiguiente2.estado"
+                    (click)="cambiarFlagCompra();" (ngSubmit)="cambiarFlagCompra()">Agregar +</button>
+
+
+            <br>
+
+            <div class="row" *ngIf="verCompra">
+              <div class="col">
+                <table class="table">
+                  <thead class="thead-dark">
+                    <th>Id</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of arrayPiezas; let i = index">
+                      <td >{{i +1 }}</td>
+                      <td >{{item.descripcionPieza}}</td>
+                      <td >{{item.cantidad}}</td>
+                      <td >{{item.precioUnitario}}</td>
+                      <td >{{item.total}}</td>
+                    </tr>                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+ 
+          <div [ngStyle]="{'width':'100%'}" class="row justify-content-center">
+
+                <div class="col-md-2">
+                  <button  mat-button matStepperPrevious class="btn btn-outline-primary btn-block btn-toolbar"> Atrás </button>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" [disabled]="!this.botones.botonSiguiente2.estado" mat-button matStepperNext class="btn btn-outline-primary btn-block btn-toolbar"> Siguiente </button>
+                </div>
+          </div>
+
+          </form>
+        </div>     
+    </mat-step>
+
+    <mat-step label="Resumen de la compra">
+      <div class="col-5 mx-auto" [ngStyle]="{'width':'100%'}" class="row justify-content-center">
+        <form autocomplete="off" [formGroup]="forma2" [ngStyle]="{'width':'80%'}">
+        
+          <div class="form-group row">
+            <strong class="row justify-content-center">---------------------------------------------------------------------------------------------------------------------------------------------------------</strong><br>
+            <strong class="row justify-content-center">Datos del Usuario</strong><br>
+            <strong class="row justify-content-center">---------------------------------------------------------------------------------------------------------------------------------------------------------</strong><br>
+
+            <strong  [ngStyle]="{'width':'24%'}">Nombre: </strong>
+              <div  [ngStyle]="{'width':'67%'}">   
+                <h3><p>{{valoresHtml.nombreusuario}}</p></h3>                     
+              </div>
+            <strong  [ngStyle]="{'width':'24%'}">Nit: </strong>
+              <div  [ngStyle]="{'width':'67%'}">   
+                <h3><p>{{valoresHtml.nit}}</p></h3>                     
+              </div>
+            </div> 
+            <div class="form-group row">
+              <strong  [ngStyle]="{'width':'24%'}">Pais: </strong>
+                <div  [ngStyle]="{'width':'67%'}">   
+                  <h3><p></p></h3>                     
+                </div>
+              <strong  [ngStyle]="{'width':'24%'}">Departamento: </strong>
+                <div  [ngStyle]="{'width':'67%'}">   
+                  <h3><p></p></h3>                     
+                </div>
+                <strong  [ngStyle]="{'width':'24%'}">Ciudad: </strong>
+                <div  [ngStyle]="{'width':'67%'}">   
+                  <h3><p></p></h3>                     
+                </div>
+              <strong  [ngStyle]="{'width':'24%'}">Tipo de dirección: </strong>
+                <div  [ngStyle]="{'width':'67%'}">   
+                  <h3><p></p></h3>                     
+                </div>
+              </div> 
+              <div class="form-group row">
+                <strong  [ngStyle]="{'width':'24%'}">Descripción: </strong>
+                  <div  [ngStyle]="{'width':'67%'}">   
+                    <h3><p>{{valoresHtml.descripcion}}</p></h3>                     
+                  </div>
+
+                <br><br>
+                <strong class="row justify-content-center">---------------------------------------------------------------------------------------------------------------------------------------------------------</strong><br>
+                <strong class="row justify-content-center">Datos de las piezas</strong> 
+                <strong class="row justify-content-center">---------------------------------------------------------------------------------------------------------------------------------------------------------</strong><br>
+
+                <br>                
+                <div class="col">
+                  <table class="table">
+                    <thead class="thead-dark">
+                      <th>Id</th>
+                      <th>Descripción</th>
+                      <th>Cantidad</th>
+                      <th>Precio Unitario</th>
+                      <th>Total</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of arrayPiezas; let i = index">
+                        <td >{{i +1 }}</td>
+                        <td >{{item.descripcionPieza}}</td>
+                        <td >{{item.cantidad}}</td>
+                        <td >{{item.precioUnitario}}</td>
+                        <td >{{item.total}}</td>  
+                      </tr>                  
+                    </tbody>
+                  </table>
+                </div>
+
+                <strong class="row justify-content-center">---------------------------------------------------------------------------------------------------------------------------------------------------------</strong><br>
+            </div>
+              <br>
+ 
+            <div [ngStyle]="{'width':'100%'}" class="row justify-content-center">
+              <div class="col-md-2">
+                <button  mat-button matStepperPrevious class="btn btn-outline-primary btn-block btn-toolbar"> Atrás </button>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-outline-primary btn-block btn-toolbar"> Guardar </button>
+              </div>
+        </div>
+
+          </form>
+        </div> 
+    </mat-step>
+
+    
+
+</mat-horizontal-stepper>

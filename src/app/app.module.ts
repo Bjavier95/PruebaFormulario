@@ -8,8 +8,8 @@ import { DatauserComponent } from './pages/datauser/datauser.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 
-// import{ MatTabsModule } from '@angular/material/tabs'
-// import{ MatStepperModule } from '@angular/material/stepper'
+import{ MatTabsModule } from '@angular/material/tabs'
+import{ MatStepperModule } from '@angular/material/stepper'
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -24,8 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    // MatTabsModule,
-    // MatStepperModule,
+    MatTabsModule,
+    MatStepperModule,
     HttpClientModule
   ],
   providers: [],
