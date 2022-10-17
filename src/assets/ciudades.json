@@ -1,0 +1,137 @@
+[
+    {
+        "idDepartamento": 1,
+        "idCiudad": 1,
+        "descripcion": "Bagua"
+    },
+    {
+        "idDepartamento": 1,
+        "idCiudad": 2,
+        "descripcion": "Bongara"
+    },   
+    {
+        "idDepartamento": 1,
+        "idCiudad": 3,
+        "descripcion": "Chachapoyas"
+    },
+    {
+        "idDepartamento": 2,
+        "idCiudad": 4,
+        "descripcion": "Medellin"
+    },
+    {
+        "idDepartamento": 2,
+        "idCiudad": 5,
+        "descripcion": "Abejorral"
+    },
+    {
+        "idDepartamento": 2,
+        "idCiudad": 6,
+        "descripcion": "Abriaqui"
+    },
+    {
+        "idDepartamento": 3,
+        "idCiudad": 7,
+        "descripcion": "Fortul"
+    },
+    {
+        "idDepartamento": 3,
+        "idCiudad": 8,
+        "descripcion": "Saravena"
+    },
+    {
+        "idDepartamento": 3,
+        "idCiudad": 9,
+        "descripcion": "Tame"
+    },
+    {
+        "idDepartamento": 4,
+        "idCiudad": 10,
+        "descripcion": "Alanje"
+    },
+    {
+        "idDepartamento": 4,
+        "idCiudad": 11,
+        "descripcion": "Barú"
+    },
+    {
+        "idDepartamento": 4,
+        "idCiudad": 12,
+        "descripcion": "Boquerón"
+    },
+    {
+        "idDepartamento": 5,
+        "idCiudad": 13,
+        "descripcion": "Aguadulce"
+    },
+    {
+        "idDepartamento": 5,
+        "idCiudad": 14,
+        "descripcion": "Antón"
+    },
+    {
+        "idDepartamento": 5,
+        "idCiudad": 15,
+        "descripcion": "La Pintada"
+    },
+    {
+        "idDepartamento": 6,
+        "idCiudad": 16,
+        "descripcion": "Chagres"
+    },
+    {
+        "idDepartamento": 6,
+        "idCiudad": 17,
+        "descripcion": "Donoso"
+    },
+    {
+        "idDepartamento": 6,
+        "idCiudad": 18,
+        "descripcion": "Portobelo"
+    },
+    {
+        "idDepartamento": 7,
+        "idCiudad": 19,
+        "descripcion": "Tamarugal"
+    },
+    {
+        "idDepartamento": 7,
+        "idCiudad": 20,
+        "descripcion": "Iquique"
+    },
+    {
+        "idDepartamento": 7,
+        "idCiudad": 21,
+        "descripcion": "Huara"
+    },
+    {
+        "idDepartamento": 8,
+        "idCiudad": 22,
+        "descripcion": "El Loa"
+    },
+    {
+        "idDepartamento": 8,
+        "idCiudad": 23,
+        "descripcion": "Tocopilla"
+    },
+    {
+        "idDepartamento": 8,
+        "idCiudad": 24,
+        "descripcion": "Mejillones"
+    },
+    {
+        "idDepartamento": 9,
+        "idCiudad": 25,
+        "descripcion": "Copiapó"
+    },
+    {
+        "idDepartamento": 9,
+        "idCiudad": 26,
+        "descripcion": "Huasco"
+    },
+    {
+        "idDepartamento": 9,
+        "idCiudad": 27,
+        "descripcion": "Chañaral"
+    }
+]

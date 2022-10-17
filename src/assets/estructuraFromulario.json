@@ -1,0 +1,50 @@
+{
+    "idPais": 1,
+    "nombre": "Pepito Perez",
+    "nit": "123456789-0",
+    "ubicaciones": [
+        {
+            "idDepartamento": 1,
+            "idCiudad": 1,
+            "direcciones": [
+                {
+                    "idTipoDireccion": 1,
+                    "direccion": "5 #4-48"
+                },
+                {
+                    "idTipoDireccion": 2,
+                    "descripcion": "6 #7-38"
+                }
+            ]           
+        },
+        {
+            "idDepartamento": 2,
+            "idCiudad": 3,
+            "direcciones": [
+                {
+                    "idTipoDireccion": 3,
+                    "direccion": "8 #3-72"
+                },
+                {
+                    "idTipoDireccion": 2,
+                    "descripcion": "6 #13a-56"
+                }
+            ]           
+        }
+    ],
+    "piezas": [
+        {
+            "cantidad": 1,
+            "descripcion": "Tornillo 1/2",
+            "precioUnitario": 1000,
+            "total": 1000
+        },
+        {
+            "cantidad": 2,
+            "descripcion": "Chazos 1/2",
+            "precioUnitario": 2000,
+            "total": 4000
+        }
+    ],
+    "total": 5000 
+}

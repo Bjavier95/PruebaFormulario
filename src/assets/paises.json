@@ -1,0 +1,14 @@
+[
+    {
+        "idPais": 1,
+        "descripcion": "Colombia"
+    },
+    {
+        "idPais": 2,
+        "descripcion": "Panama"
+    },
+    {
+        "idPais": 3,
+        "descripcion": "Chile"
+    }
+]

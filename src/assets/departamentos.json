@@ -1,0 +1,47 @@
+[
+    {
+        "idPais": 1,
+        "idDepartamento": 1,
+        "descripcion":"Amazonas"
+    },
+    {
+        "idPais": 1,
+        "idDepartamento": 2,
+        "descripcion":"Antioquia"
+    },
+    {
+        "idPais": 1,
+        "idDepartamento": 3,
+        "descripcion":"Arauca"
+    },
+    {
+        "idPais": 2,
+        "idDepartamento": 4,
+        "descripcion":"Chiriquí"
+    },
+    {
+        "idPais": 2,
+        "idDepartamento": 5,
+        "descripcion":"Coclé"
+    },
+    {
+        "idPais": 2,
+        "idDepartamento": 6,
+        "descripcion":"Colón"
+    },
+    {
+        "idPais": 3,
+        "idDepartamento": 7,
+        "descripcion":"Tarapacá"
+    },
+    {
+        "idPais": 3,
+        "idDepartamento": 8,
+        "descripcion":"Antofagasta"
+    },
+    {
+        "idPais": 3,
+        "idDepartamento": 9,
+        "descripcion":"Atacama"
+    }
+]
