@@ -45,9 +45,12 @@
                     <span class="text-danger font-weight-bold">*</span>
                   </label>                    
                   <div class="col-8">              
-                      <select class="form-control" id="pais"  (change)="validarBotonSiguiente(); setMoneda();">
+                      <select class="form-control" id="pais" name="idPais"  
+                             (change)="validarBotonSiguiente(); 
+                                       setMoneda();
+                                       getDeptos()">
                               <option value="" selected>Seleccione un pais</option>
-                          <option *ngFor="let c of paises" value="{{c.idPais}}">{{c.descripcion}}</option>
+                          <option *ngFor="let c of paises" value={{c.idPais}}>{{c.descripcion}}</option>
                     </select>
                     <small *ngIf="paisNoValido" class= "text-danger">Seleccione un pais</small>
                   </div>
@@ -62,9 +65,11 @@
                               <span class="text-danger font-weight-bold">*</span>
                             </label>
                             <div [ngStyle]="{'width':'68%'}">
-                                <select class="form-control" id="depto"  (change)="validarBotonSiguiente();">
+                                <select class="form-control" id="idDepto" name="idDepto" 
+                                        (change)="validarBotonSiguiente(); getCiudades()"     
+                                        [disabled]="!flagSelectDepto">                                        
                                 <option value="" selected>Seleccione un departamento</option>
-                                <option *ngFor="let c of departamentos" value="{{c}}">{{c.descripcion}}</option>
+                                <option *ngFor="let c of departamentos" value="{{c.idDepartamento}}">{{c.descripcion}}</option>
                               </select>
                               <small *ngIf="departamentoNoValido" class= "text-danger">Seleccione un departamento</small>
                             </div>
@@ -79,8 +84,9 @@
                               <span class="text-danger font-weight-bold">*</span>
                             </label>
                             <div  [ngStyle]="{'width':'68%'}">
-                                <select class="form-control" id="ciudad"  (change)="validarBotonSiguiente();">
-                                <option value="" selected disabled>Seleccione una ciudad</option>
+                                <select class="form-control" id="ciudad"  (change)="validarBotonSiguiente();"
+                                [disabled]="!flagSelectCiudad">
+                                <option value="" selected>Seleccione una ciudad</option>
                                 <option *ngFor="let c of ciudades" value="{{c}}">{{c.descripcion}}</option>
                               </select>
                               <small *ngIf="ciudadNoValida" class= "text-danger">Seleccione una Ciudad</small>

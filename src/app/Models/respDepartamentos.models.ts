@@ -1,5 +1,6 @@
 export interface RespDepartamentos{
-    idPais: number;
+    idPais: number,
+    idDepartamento: number;
     descripcion: string;
   }
   

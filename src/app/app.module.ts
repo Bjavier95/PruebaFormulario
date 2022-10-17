@@ -12,6 +12,11 @@ import{ MatTabsModule } from '@angular/material/tabs'
 import{ MatStepperModule } from '@angular/material/stepper'
 import { HttpClientModule } from '@angular/common/http';
 
+import { jsonServicios } from './services/jsonServicios.service';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatStepperModule,
     HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [jsonServicios],
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

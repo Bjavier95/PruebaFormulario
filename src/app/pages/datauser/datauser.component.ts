@@ -5,6 +5,7 @@ import { RespPaises } from 'src/app/Models/respPaises.models';
 import { RespCiudades } from '../../Models/respCiudades.models';
 import { RespTipoDireccion } from '../../Models/respTipodirecciones.models';
 import { RespDepartamentos } from 'src/app/Models/respDepartamentos.models';
+import { jsonServicios } from '../../services/jsonServicios.service';
 
 
 @Component({
@@ -33,6 +34,9 @@ export class DatauserComponent implements OnInit {
   moneda = 0;
   arrayPiezas: any[] = [];
   objCliente: any[] = [];
+  flagSelectDepto = false;
+  flagSelectCiudad = false;
+
 
 
 
@@ -62,15 +66,15 @@ export class DatauserComponent implements OnInit {
     cantidad: '',
     descPieza: ''
   }
-  constructor( private fb: FormBuilder, private httpClient: HttpClient) { 
+  constructor( private fb: FormBuilder,
+               private httpClient: HttpClient,
+               private jsonServices : jsonServicios) { 
     this.createForm();
     this.createFormParts();
   }
 
   ngOnInit(): void {
     this.getPaises();
-    this.getCiudades();
-    this.getDepartamentos();
     this.getTipoDeDireccion();
   }
 
@@ -170,9 +174,7 @@ export class DatauserComponent implements OnInit {
   } 
   
   guardarForm1(){
-    console.log("Function guardarForm1: ", this.forma.value);
     this.objCliente.push(this.forma.value);
-    // console.log('cliente: ', this.objCliente);
 
     this.valoresHtml.nombreusuario = this.objCliente[0].nombre;
     this.valoresHtml.nit = this.objCliente[0].nit;
@@ -181,9 +183,6 @@ export class DatauserComponent implements OnInit {
     this.valoresHtml.ciudad = this.objCliente[0].ubicaciones.ciudad;
     this.valoresHtml.tipoDir = this.objCliente[0].direcciones.tipoDireccion;
     this.valoresHtml.descripcion = this.objCliente[0].direcciones.descripcion;
-
-
-    
 
     if(this.forma.invalid){
       return Object.values(this.forma.controls).forEach(control => {
@@ -197,48 +196,49 @@ export class DatauserComponent implements OnInit {
     }
   }
 
-  borrarPieza(id: number){
-  }
-
-  getPaises(){
-    this.httpClient.get('../../../assets/paises.json').subscribe(data =>{
+getPaises(){
+    this.jsonServices.getPaisesService('../../../assets/paises.json').subscribe(data =>{
       const resp = data as any;
-      this.paises = resp; 
-      // console.log('paises: ', this.paises);      
-
+      this.paises = resp;  
     });
 }
 
-getCiudades(){
-  this.httpClient.get('../../../assets/ciudades.json').subscribe(data =>{
+getDeptos(){
+  this.flagSelectDepto = true;
+  let idPais =  (<HTMLInputElement>document.getElementById('pais')).value;
+
+  this.jsonServices.getDepartamentosService('../../../assets/departamentos.json').subscribe(data =>{
       const resp = data as any;
-      this.ciudades = resp; 
-      // console.log('departamentos: ', this.ciudades);      
+      let res = resp.filter( item => item.idPais == idPais );
+      this.departamentos = res; 
   });
 }
 
-getDepartamentos(){
-  this.httpClient.get('../../../assets/departamentos.json').subscribe(data =>{
+getCiudades(){
+  this.flagSelectCiudad= true;
+  let idDep = (<HTMLInputElement>document.getElementById('idDepto')).value;
+
+  this.jsonServices.getCiudadesService('../../../assets/ciudades.json').subscribe(data =>{
       const resp = data as any;
-      this.departamentos = resp; 
-      // console.log('ciudades: ', this.departamentos);        
+      let res = resp.filter( item => item.idDepartamento == idDep );
+      this.ciudades = res;  
   });
 }
 
 getTipoDeDireccion(){
-  this.httpClient.get('../../../assets/tipoDireccion.json').subscribe(data =>{
+  this.jsonServices.getTiposDireccionesService('../../../assets/tipoDireccion.json').subscribe(data =>{
       const resp = data as any;
-      this.tipoDirecciones = resp; 
-      // console.log('tipos de direcciones: ', this.tipoDirecciones);       
+      this.tipoDirecciones = resp;       
   });
 }
+
 
 validarBotonSiguiente() {
   this.valoresHtml.nombreusuario = (<HTMLInputElement>document.getElementById('nombreusuario')).value;
   this.valoresHtml.nit = (<HTMLInputElement>document.getElementById('nit')).value;
   this.valoresHtml.descripcion = (<HTMLInputElement>document.getElementById('descripcion')).value;
   this.valoresHtml.pais = (<HTMLInputElement>document.getElementById('pais')).value;
-  this.valoresHtml.depto = (<HTMLInputElement>document.getElementById('depto')).value;
+  this.valoresHtml.depto = (<HTMLInputElement>document.getElementById('idDepto')).value;
   this.valoresHtml.ciudad = (<HTMLInputElement>document.getElementById('ciudad')).value;
   this.valoresHtml.tipoDir = (<HTMLInputElement>document.getElementById('tipoDir')).value;
 
