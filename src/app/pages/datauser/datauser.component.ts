@@ -53,6 +53,12 @@ export class DatauserComponent implements OnInit {
     estado : false
   }
 
+  descPais: string = '';
+  descDepartamento: string = '';
+  descCiudad: string = '';
+  descTipoDir: string = '';
+
+
   
   valoresHtml = {
     nombreusuario: '',
@@ -67,7 +73,6 @@ export class DatauserComponent implements OnInit {
     descPieza: ''
   }
   constructor( private fb: FormBuilder,
-               private httpClient: HttpClient,
                private jsonServices : jsonServicios) { 
     this.createForm();
     this.createFormParts();
@@ -124,7 +129,7 @@ export class DatauserComponent implements OnInit {
       nombre: ['', Validators.required],
       nit: ['', Validators.required],
       ubicaciones : this.fb.group({
-        departamento: ['', Validators.required],
+        departamento: [{value: ''}, Validators.required],
         ciudad: ['', Validators.required],
       }),
       direcciones : this.fb.group({
@@ -167,10 +172,6 @@ export class DatauserComponent implements OnInit {
         }
       })
     }
-
- 
-
-
   } 
   
   guardarForm1(){
@@ -184,6 +185,9 @@ export class DatauserComponent implements OnInit {
     this.valoresHtml.tipoDir = this.objCliente[0].direcciones.tipoDireccion;
     this.valoresHtml.descripcion = this.objCliente[0].direcciones.descripcion;
 
+    this.obtenerDesc();
+
+
     if(this.forma.invalid){
       return Object.values(this.forma.controls).forEach(control => {
         if(control instanceof FormGroup){
@@ -196,6 +200,33 @@ export class DatauserComponent implements OnInit {
     }
   }
 
+obtenerDesc(){
+    for(let i = 0; i<this.departamentos.length; i++){
+      if(this.departamentos[i].idDepartamento == parseInt(this.valoresHtml.depto)){
+        this.descDepartamento = this.departamentos[i].descripcion;
+      }
+    } 
+
+    for(let i = 0; i<this.ciudades.length; i++){
+      if(this.ciudades[i].idCiudad == parseInt(this.valoresHtml.ciudad)){
+        this.descCiudad = this.ciudades[i].descripcion;
+      }
+    }
+
+    for(let i = 0; i<this.paises.length; i++){
+      if(this.paises[i].idPais == parseInt(this.valoresHtml.pais)){
+        this.descPais = this.paises[i].descripcion;
+      }
+    }
+
+    for(let i = 0; i<this.tipoDirecciones.length; i++){
+      if(this.tipoDirecciones[i].idTipoDesc == parseInt(this.valoresHtml.tipoDir)){
+        this.descTipoDir = this.tipoDirecciones[i].descripcion;
+      }
+    }
+  
+  
+}
 getPaises(){
     this.jsonServices.getPaisesService('../../../assets/paises.json').subscribe(data =>{
       const resp = data as any;
@@ -205,6 +236,9 @@ getPaises(){
 
 getDeptos(){
   this.flagSelectDepto = true;
+  // this.forma.get('departamento')?.enable();
+  console.log('deptosflag: ', this.flagSelectDepto);
+
   let idPais =  (<HTMLInputElement>document.getElementById('pais')).value;
 
   this.jsonServices.getDepartamentosService('../../../assets/departamentos.json').subscribe(data =>{
@@ -246,7 +280,7 @@ validarBotonSiguiente() {
   if( this.valoresHtml.nombreusuario.length > 0 &&
       this.valoresHtml.nit.length > 0 &&
       this.valoresHtml.descripcion.length > 0 &&
-      this.valoresHtml.pais.length > 0 &&
+      parseInt(this.valoresHtml.pais)> 0 &&
       this.valoresHtml.ciudad.length > 0 &&
       this.valoresHtml.tipoDir.length > 0 &&
       this.valoresHtml.depto.length > 0){

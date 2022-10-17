@@ -1,5 +1,6 @@
 export interface RespCiudades {
-    idPais: number;
+    idDepartamento: number;
+    idCiudad: number;
     descripcion: string;
   }
-  
+   

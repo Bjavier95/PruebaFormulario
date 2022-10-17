@@ -12,8 +12,7 @@
                            placeholder="Nombre"
                            formControlName="nombre"
                            id="nombreusuario"
-                           [class.is-invalid]="nombreNoValido"
-                           (change)="validarBotonSiguiente();">
+                           [class.is-invalid]="nombreNoValido">
                     <small *ngIf="nombreNoValido" class= "text-danger">Ingrese un nombre</small>
                   </div>
                 </div>  
@@ -32,8 +31,7 @@
                     placeholder="Nit"
                     id="nit"
                     formControlName="nit"
-                    [class.is-invalid]="nitNoValido"
-                    (change)="validarBotonSiguiente();">
+                    [class.is-invalid]="nitNoValido">
                     <small *ngIf="nitNoValido" class= "text-danger">Ingrese un nit</small>
                   </div>
                 </div> 
@@ -46,9 +44,9 @@
                   </label>                    
                   <div class="col-8">              
                       <select class="form-control" id="pais" name="idPais"  
-                             (change)="validarBotonSiguiente(); 
-                                       setMoneda();
-                                       getDeptos()">
+                             (change)= "setMoneda();
+                                       getDeptos()"
+                                       formControlName="pais">
                               <option value="" selected>Seleccione un pais</option>
                           <option *ngFor="let c of paises" value={{c.idPais}}>{{c.descripcion}}</option>
                     </select>
@@ -66,9 +64,9 @@
                             </label>
                             <div [ngStyle]="{'width':'68%'}">
                                 <select class="form-control" id="idDepto" name="idDepto" 
-                                        (change)="validarBotonSiguiente(); getCiudades()"     
-                                        [disabled]="!flagSelectDepto">                                        
-                                <option value="" selected>Seleccione un departamento</option>
+                                        (change)="getCiudades()"
+                                        formControlName="departamento">                                        
+                                <option selected>Seleccione un departamento</option>
                                 <option *ngFor="let c of departamentos" value="{{c.idDepartamento}}">{{c.descripcion}}</option>
                               </select>
                               <small *ngIf="departamentoNoValido" class= "text-danger">Seleccione un departamento</small>
@@ -84,10 +82,11 @@
                               <span class="text-danger font-weight-bold">*</span>
                             </label>
                             <div  [ngStyle]="{'width':'68%'}">
-                                <select class="form-control" id="ciudad"  (change)="validarBotonSiguiente();"
-                                [disabled]="!flagSelectCiudad">
+                                <select class="form-control" id="ciudad"
+                                [disabled]="!flagSelectCiudad"
+                                formControlName="ciudad">
                                 <option value="" selected>Seleccione una ciudad</option>
-                                <option *ngFor="let c of ciudades" value="{{c}}">{{c.descripcion}}</option>
+                                <option *ngFor="let c of ciudades" value="{{c.idCiudad}}">{{c.descripcion}}</option>
                               </select>
                               <small *ngIf="ciudadNoValida" class= "text-danger">Seleccione una Ciudad</small>
                             </div>
@@ -103,9 +102,9 @@
                               <span class="text-danger font-weight-bold">*</span>
                             </label>
                             <div  [ngStyle]="{'width':'68%'}">
-                                <select class="form-control input-peque" id="tipoDir"  (change)="validarBotonSiguiente();">
+                                <select class="form-control input-peque" id="tipoDir">
                                 <option value="" selected disabled>Seleccione un tipo de dirección</option>
-                                <option *ngFor="let c of tipoDirecciones" value="{{c}}">{{c.descripcion}}</option>
+                                <option *ngFor="let c of tipoDirecciones" value="{{c.idTipoDesc}}">{{c.descripcion}}</option>
                               </select>
                               <small *ngIf="ciudadNoValida" class= "text-danger">Seleccione un tipo de dirección</small>
                             </div>
@@ -274,35 +273,35 @@
 
             <strong  [ngStyle]="{'width':'24%'}">Nombre: </strong>
               <div  [ngStyle]="{'width':'67%'}">   
-                <h3><p>{{valoresHtml.nombreusuario}}</p></h3>                     
+                <h5><p>{{valoresHtml.nombreusuario}}</p></h5>                     
               </div>
             <strong  [ngStyle]="{'width':'24%'}">Nit: </strong>
               <div  [ngStyle]="{'width':'67%'}">   
-                <h3><p>{{valoresHtml.nit}}</p></h3>                     
+                <h5><p>{{valoresHtml.nit}}</p></h5>                     
               </div>
             </div> 
             <div class="form-group row">
               <strong  [ngStyle]="{'width':'24%'}">Pais: </strong>
                 <div  [ngStyle]="{'width':'67%'}">   
-                  <h3><p></p></h3>                     
+                  <h5><p>{{descPais}}</p></h5>                     
                 </div>
               <strong  [ngStyle]="{'width':'24%'}">Departamento: </strong>
                 <div  [ngStyle]="{'width':'67%'}">   
-                  <h3><p></p></h3>                     
+                  <h5><p>{{descDepartamento}}</p></h5>                     
                 </div>
                 <strong  [ngStyle]="{'width':'24%'}">Ciudad: </strong>
                 <div  [ngStyle]="{'width':'67%'}">   
-                  <h3><p></p></h3>                     
+                  <h5><p>{{descCiudad}}</p></h5>                     
                 </div>
               <strong  [ngStyle]="{'width':'24%'}">Tipo de dirección: </strong>
                 <div  [ngStyle]="{'width':'67%'}">   
-                  <h3><p></p></h3>                     
+                  <h5><p>{{descTipoDir}}</p></h5>                     
                 </div>
               </div> 
               <div class="form-group row">
                 <strong  [ngStyle]="{'width':'24%'}">Descripción: </strong>
                   <div  [ngStyle]="{'width':'67%'}">   
-                    <h3><p>{{valoresHtml.descripcion}}</p></h3>                     
+                    <h5><p>{{valoresHtml.descripcion}}</p></h5>                     
                   </div>
 
                 <br><br>

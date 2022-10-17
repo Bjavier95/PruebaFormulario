@@ -1,5 +1,5 @@
 export interface RespTipoDireccion {
-    idPais: number;
+    idTipoDesc: number;
     descripcion: string;
   }
   
