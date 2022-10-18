@@ -47,7 +47,7 @@
                              (change)= "setMoneda();
                                        getDeptos()"
                                        formControlName="pais">
-                              <option value="" selected>Seleccione un pais</option>
+                              <!-- <option value="" selected>Seleccione un pais</option> -->
                           <option *ngFor="let c of paises" value={{c.idPais}}>{{c.descripcion}}</option>
                     </select>
                     <small *ngIf="paisNoValido" class= "text-danger">Seleccione un pais</small>
@@ -62,11 +62,11 @@
                             <label [ngStyle]="{'width':'18%'}">Departamento
                               <span class="text-danger font-weight-bold">*</span>
                             </label>
-                            <div [ngStyle]="{'width':'68%'}">
+                            <div [ngStyle]="{'width':'69%'}">
                                 <select class="form-control" id="idDepto" name="idDepto" 
                                         (change)="getCiudades()"
                                         formControlName="departamento">                                        
-                                <option selected>Seleccione un departamento</option>
+                                <!-- <option value=""  selected>Seleccione un departamento</option> -->
                                 <option *ngFor="let c of departamentos" value="{{c.idDepartamento}}">{{c.descripcion}}</option>
                               </select>
                               <small *ngIf="departamentoNoValido" class= "text-danger">Seleccione un departamento</small>
@@ -81,11 +81,11 @@
                             <label  [ngStyle]="{'width':'18%'}">Ciudad
                               <span class="text-danger font-weight-bold">*</span>
                             </label>
-                            <div  [ngStyle]="{'width':'68%'}">
+                            <div  [ngStyle]="{'width':'69%'}">
                                 <select class="form-control" id="ciudad"
                                 [disabled]="!flagSelectCiudad"
                                 formControlName="ciudad">
-                                <option value="" selected>Seleccione una ciudad</option>
+                                <!-- <option value="" selected>Seleccione una ciudad</option> -->
                                 <option *ngFor="let c of ciudades" value="{{c.idCiudad}}">{{c.descripcion}}</option>
                               </select>
                               <small *ngIf="ciudadNoValida" class= "text-danger">Seleccione una Ciudad</small>
@@ -101,9 +101,10 @@
                             <label  [ngStyle]="{'width':'18%'}">Tipo de dirección
                               <span class="text-danger font-weight-bold">*</span>
                             </label>
-                            <div  [ngStyle]="{'width':'68%'}">
-                                <select class="form-control input-peque" id="tipoDir">
-                                <option value="" selected disabled>Seleccione un tipo de dirección</option>
+                            <div  [ngStyle]="{'width':'69%'}">
+                                <select class="form-control input-peque" id="tipoDireccion"
+                                formControlName="tipoDireccion">
+                                <!-- <option value="" selected>Seleccione un tipo de dirección</option> -->
                                 <option *ngFor="let c of tipoDirecciones" value="{{c.idTipoDesc}}">{{c.descripcion}}</option>
                               </select>
                               <small *ngIf="ciudadNoValida" class= "text-danger">Seleccione un tipo de dirección</small>
@@ -116,7 +117,7 @@
                           <label  [ngStyle]="{'width':'17%'}">Descripción
                             <span class="text-danger font-weight-bold">*</span>
                           </label>
-                          <div  [ngStyle]="{'width':'67%'}">
+                          <div  [ngStyle]="{'width':'68%'}">
                             <textarea class="form-control" [ngStyle]="{'resize':'none'}"
                             type="text"
                             placeholder="Descripción"
@@ -218,7 +219,7 @@
             <br>
            
            
-            <button type="submit" class="btn btn-primary mt-3" 
+            <button type="submit" class="btn btn-primary mt-3 text-right" 
                     [disabled]="!this.botones.botonSiguiente2.estado"
                     (click)="cambiarFlagCompra();" (ngSubmit)="cambiarFlagCompra()">Agregar +</button>
 
@@ -340,7 +341,7 @@
                 <button  mat-button matStepperPrevious class="btn btn-outline-primary btn-block btn-toolbar"> Atrás </button>
               </div>
               <div class="col-md-2">
-                <button class="btn btn-outline-primary btn-block btn-toolbar"> Guardar </button>
+                <button class="btn btn-outline-primary btn-block btn-toolbar" (click)="guardarInf()"> Guardar </button>
               </div>
         </div>
 

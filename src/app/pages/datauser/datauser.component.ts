@@ -6,6 +6,7 @@ import { RespCiudades } from '../../Models/respCiudades.models';
 import { RespTipoDireccion } from '../../Models/respTipodirecciones.models';
 import { RespDepartamentos } from 'src/app/Models/respDepartamentos.models';
 import { jsonServicios } from '../../services/jsonServicios.service';
+import { compraModel } from '../../Models/compraModel.models';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class DatauserComponent implements OnInit {
 
   forma!: FormGroup; 
   forma2!: FormGroup; 
+  compra!: compraModel;
+
 
   cant: any;
   precio: any;
@@ -81,6 +84,12 @@ export class DatauserComponent implements OnInit {
   ngOnInit(): void {
     this.getPaises();
     this.getTipoDeDireccion();
+
+    
+  this.jsonServices.getPaisesService('../../../assets/estructuraFromulario.json').subscribe(data =>{ 
+    this.compra = data;
+    // console.log('compra: ', compra);
+  });
   }
 
   get paisNoValido(){
@@ -220,6 +229,9 @@ obtenerDesc(){
     }
 
     for(let i = 0; i<this.tipoDirecciones.length; i++){
+      console.log(this.valoresHtml.tipoDir);
+      console.log(this.tipoDirecciones[i].idTipoDesc);
+
       if(this.tipoDirecciones[i].idTipoDesc == parseInt(this.valoresHtml.tipoDir)){
         this.descTipoDir = this.tipoDirecciones[i].descripcion;
       }
@@ -237,7 +249,6 @@ getPaises(){
 getDeptos(){
   this.flagSelectDepto = true;
   // this.forma.get('departamento')?.enable();
-  console.log('deptosflag: ', this.flagSelectDepto);
 
   let idPais =  (<HTMLInputElement>document.getElementById('pais')).value;
 
@@ -274,7 +285,7 @@ validarBotonSiguiente() {
   this.valoresHtml.pais = (<HTMLInputElement>document.getElementById('pais')).value;
   this.valoresHtml.depto = (<HTMLInputElement>document.getElementById('idDepto')).value;
   this.valoresHtml.ciudad = (<HTMLInputElement>document.getElementById('ciudad')).value;
-  this.valoresHtml.tipoDir = (<HTMLInputElement>document.getElementById('tipoDir')).value;
+  this.valoresHtml.tipoDir = (<HTMLInputElement>document.getElementById('tipoDireccion')).value;
 
 
   if( this.valoresHtml.nombreusuario.length > 0 &&
@@ -343,6 +354,18 @@ calcularTotal(){
 
 cambiarFlagCompra(){
   this.verCompra = true;
+}
+
+
+
+guardarInf(){
+  console.log('funcion guardarInf');
+
+
+  this.jsonServices.guardarCompra(this.compra).subscribe(resp => {
+    console.log('resp: ', resp);
+  })
+
 }
 
 }

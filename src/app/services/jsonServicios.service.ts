@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RespPaises } from 'src/app/Models/respPaises.models';
-
+import { compraModel } from '../Models/compraModel.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class jsonServicios {
+
+  url = 'https://formtest-a7601-default-rtdb.firebaseio.com';
 
   constructor( private httpClient: HttpClient ) { 
   }
@@ -26,5 +27,9 @@ export class jsonServicios {
   
   getTiposDireccionesService(url: string): Observable<any>{
     return this.httpClient.get(url);
+  }
+
+  guardarCompra(compra: compraModel){
+    return this.httpClient.post(`${this.url}/compras.json`, compra);
   }
 }

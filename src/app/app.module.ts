@@ -13,6 +13,7 @@ import{ MatStepperModule } from '@angular/material/stepper'
 import { HttpClientModule } from '@angular/common/http';
 
 import { jsonServicios } from './services/jsonServicios.service';
+import { CompraComponent } from './pages/compra/compra.component';
 
 
 
@@ -22,6 +23,7 @@ import { jsonServicios } from './services/jsonServicios.service';
     AppComponent,
     LoginComponent,
     DatauserComponent,
+    CompraComponent,
   ],
   imports: [
     BrowserModule,
