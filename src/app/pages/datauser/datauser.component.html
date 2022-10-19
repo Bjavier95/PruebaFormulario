@@ -277,7 +277,7 @@
 
     <mat-step label="Resumen de la compra">
       <div class="col-5 mx-auto" [ngStyle]="{'width':'100%'}" class="row justify-content-center">
-        <form autocomplete="off" [formGroup]="forma3" [ngStyle]="{'width':'80%'}" *ngIf="verDiv">
+        <form autocomplete="off" [formGroup]="forma3" [ngStyle]="{'width':'80%'}">
             
         
           <div class="form-group row">
@@ -360,7 +360,7 @@
 
           </form>
 
-          <div class="alert alert-info text-center mt-3" *ngIf="animacionEnviando == true">
+          <!-- <div class="alert alert-info text-center mt-3">
             <h4 class="alert-heading">Guardando</h4>
             <p>
                 <i class="fa fa-sync-alt fa-spin fa-2x"></i>
@@ -368,13 +368,13 @@
             <p class="mb-0">Espere por favor...</p>
           </div>
 
-          <div class="alert alert-info text-center mt-3" *ngIf="animacionGuardado == true">
+          <div class="alert alert-info text-center mt-3">
             <h4 class="alert-heading">Guardado</h4>
             <p>
                 <i class="fa fa-check fa-2x"></i>
             </p>
             <p class="mb-0">Compra registrada con exito!</p>
-          </div>
+          </div> -->
 
      
         </div> 

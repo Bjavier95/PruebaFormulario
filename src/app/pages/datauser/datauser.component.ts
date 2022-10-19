@@ -7,6 +7,8 @@ import { RespTipoDireccion } from '../../Models/respTipodirecciones.models';
 import { RespDepartamentos } from 'src/app/Models/respDepartamentos.models';
 import { jsonServicios } from '../../services/jsonServicios.service';
 import { compraModel } from '../../Models/compraModel.models';
+import { NgSwitchDefault } from '@angular/common';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -424,8 +426,14 @@ guardarCompra(){
   console.log('funcion guardarCompra');
   console.log('Forma: ', this.forma.value);
   console.log('Forma2: ', this.forma2.value);
-  this.animacionEnviando = true;
-  this.verDiv = false
+
+
+  Swal.fire({
+    title: 'Espere',
+    text: 'Guardando información...',
+    icon: 'info'
+  });
+  Swal.showLoading();
 
 
   this.compra.nombre = this.forma.value.nombre;
@@ -447,15 +455,14 @@ guardarCompra(){
 
   this.jsonServices.guardarCompra(this.compra).subscribe(resp => {
     if(resp){
-      setTimeout(() => {
-        this.animacionEnviando = false;
-        this.animacionGuardado = true;
+      setTimeout(() => {        
+        Swal.fire({
+          title: 'Guardado',
+          text: 'Registro insertado con exito!',
+          timer: 3000,
+          icon: 'success'
+        });
       }, 3000);
-      setTimeout(() => {
-        this.animacionEnviando = false;
-        this.animacionGuardado = false;
-        this.verDiv = true;
-      }, 4000);
     }
     console.log('resp: ', resp);
   })
