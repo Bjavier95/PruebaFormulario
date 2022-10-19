@@ -41,7 +41,11 @@ export class DatauserComponent implements OnInit {
   objCliente: any[] = [];
   flagSelectDepto = false;
   flagSelectCiudad = false;
-  animacion = false;
+  animacionEnviando = false;
+  animacionGuardado = false;
+  verDiv = true;
+
+  
 
 
 
@@ -420,8 +424,8 @@ guardarCompra(){
   console.log('funcion guardarCompra');
   console.log('Forma: ', this.forma.value);
   console.log('Forma2: ', this.forma2.value);
-  this.animacion = true;
-
+  this.animacionEnviando = true;
+  this.verDiv = false
 
 
   this.compra.nombre = this.forma.value.nombre;
@@ -444,8 +448,14 @@ guardarCompra(){
   this.jsonServices.guardarCompra(this.compra).subscribe(resp => {
     if(resp){
       setTimeout(() => {
-        this.animacion = false;
+        this.animacionEnviando = false;
+        this.animacionGuardado = true;
       }, 3000);
+      setTimeout(() => {
+        this.animacionEnviando = false;
+        this.animacionGuardado = false;
+        this.verDiv = true;
+      }, 4000);
     }
     console.log('resp: ', resp);
   })
