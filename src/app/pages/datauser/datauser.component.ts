@@ -26,12 +26,14 @@ export class DatauserComponent implements OnInit {
 
   forma!: FormGroup; 
   forma2!: FormGroup; 
+  forma3!: FormGroup;
   compra!: compraModel;
 
 
   cant: any;
   precio: any;
   valTotal: any = 0;
+  valTotalCompra: any = 0;
   val: boolean = false;
   verCompra: boolean = false;
   moneda = 0;
@@ -39,6 +41,7 @@ export class DatauserComponent implements OnInit {
   objCliente: any[] = [];
   flagSelectDepto = false;
   flagSelectCiudad = false;
+  animacion = false;
 
 
 
@@ -75,21 +78,45 @@ export class DatauserComponent implements OnInit {
     cantidad: '',
     descPieza: ''
   }
+
   constructor( private fb: FormBuilder,
                private jsonServices : jsonServicios) { 
     this.createForm();
     this.createFormParts();
+    this.createFormCompras();
+
+    this.compra = {
+      "id": "",
+      "idPais": "",
+      "nombre": "",
+      "nit": "",
+      "ubicaciones": [
+          {
+              "idDepartamento": "",
+              "idCiudad": "",
+              "direcciones": [
+                  {
+                      "idTipoDireccion": "",
+                      "direccion": ""
+                  }
+              ]           
+          },
+      ],
+      "piezas": [
+          {
+              "cantidad": "",
+              "descripcion": "",
+              "precioUnitario": "",
+              "total": ""
+          }
+      ],
+      "total": "" 
+    }
   }
 
   ngOnInit(): void {
     this.getPaises();
     this.getTipoDeDireccion();
-
-    
-  this.jsonServices.getPaisesService('../../../assets/estructuraFromulario.json').subscribe(data =>{ 
-    this.compra = data;
-    // console.log('compra: ', compra);
-  });
   }
 
   get paisNoValido(){
@@ -154,15 +181,46 @@ export class DatauserComponent implements OnInit {
       cantidad: ['', Validators.required],
       precioUnitario: ['', Validators.required],
       total: ['', Validators.required],
-      ArrayPiezas: this.fb.array([
+      totalCompra: ['', Validators.required]
+      // ArrayPiezas: this.fb.array([
+      //   {
+      //     descripcion: '',
+      //     cantidad: '',
+      //     preci: '',
+      //     precioUnitario: '',
+      //     total: ''
+      //   }
+      // ])
+    });
+  }
+
+  createFormCompras(){
+    this.forma3 = this.fb.group({
+      paisClien: ['', Validators.required],
+      nombreClien: ['', Validators.required],
+      nitClien: ['', Validators.required],
+      ubicacionesClien : this.fb.group({
+        departamentoClien: [{value: ''}, Validators.required],
+        ciudadClien: ['', Validators.required],
+      }),
+      direccionesClien : this.fb.group({
+        tipoDireccionClien: ['', Validators.required],
+        descripcionClien: ['', Validators.required],
+      }),
+      descripcionPiezaClien: ['', Validators.required],
+      cantidadClien: ['', Validators.required],
+      precioUnitarioClien: ['', Validators.required],
+      totalClien: ['', Validators.required],
+      ArrayPiezasClien: this.fb.array([
         {
-          descripcion: '',
-          cantidad: '',
-          preci: '',
-          precioUnitario: '',
-          total: ''
+          descripcionClien: '',
+          cantidadClien: '',
+          precioClien: '',
+          precioUnitarioClien: '',
+          totalClien: ''
         }
-      ])
+      ]),
+      totalCompraClien: ['', Validators.required]
     });
   }
 
@@ -229,9 +287,6 @@ obtenerDesc(){
     }
 
     for(let i = 0; i<this.tipoDirecciones.length; i++){
-      console.log(this.valoresHtml.tipoDir);
-      console.log(this.tipoDirecciones[i].idTipoDesc);
-
       if(this.tipoDirecciones[i].idTipoDesc == parseInt(this.valoresHtml.tipoDir)){
         this.descTipoDir = this.tipoDirecciones[i].descripcion;
       }
@@ -354,15 +409,44 @@ calcularTotal(){
 
 cambiarFlagCompra(){
   this.verCompra = true;
+  // var filas=document.querySelectorAll("#miTabla tfoot tr td");
+  // console.log('total------->', filas[1].textContent=this.valTotal.toFixed(2));
+  // console.log('total------->', filas[1].textContent=this.valTotal.toFixed(2));
 }
 
 
 
-guardarInf(){
-  console.log('funcion guardarInf');
+guardarCompra(){
+  console.log('funcion guardarCompra');
+  console.log('Forma: ', this.forma.value);
+  console.log('Forma2: ', this.forma2.value);
+  this.animacion = true;
+
+
+
+  this.compra.nombre = this.forma.value.nombre;
+  this.compra.idPais = this.forma.value.pais;
+  this.compra.nit  = this.forma.value.nit;
+  this.compra.ubicaciones[0].idDepartamento  = this.forma.value.ubicaciones.departamento;
+  this.compra.ubicaciones[0].idCiudad  = this.forma.value.ubicaciones.ciudad;
+  this.compra.ubicaciones[0].direcciones[0].direccion  = this.forma.value.direcciones.tipoDireccion;
+  this.compra.ubicaciones[0].direcciones[0].idTipoDireccion  = this.forma.value.direcciones.descripcion;
+  this.compra.piezas[0].cantidad  = this.forma2.value.cantidad;
+  this.compra.piezas[0].descripcion  = this.forma2.value.descripcion;
+  this.compra.piezas[0].precioUnitario  = this.forma2.value.precioUnitario;
+  this.compra.piezas[0].total  = this.valTotal;
+  this.compra.total = 9000;
+
+
+  console.log('Compra: ', this.compra);
 
 
   this.jsonServices.guardarCompra(this.compra).subscribe(resp => {
+    if(resp){
+      setTimeout(() => {
+        this.animacion = false;
+      }, 3000);
+    }
     console.log('resp: ', resp);
   })
 

@@ -107,7 +107,7 @@
                                 <!-- <option value="" selected>Seleccione un tipo de dirección</option> -->
                                 <option *ngFor="let c of tipoDirecciones" value="{{c.idTipoDesc}}">{{c.descripcion}}</option>
                               </select>
-                              <small *ngIf="ciudadNoValida" class= "text-danger">Seleccione un tipo de dirección</small>
+                              <small *ngIf="tipoDireccionNoValida" class= "text-danger">Seleccione un tipo de dirección</small>
                             </div>
                           </div> 
                       </div> 
@@ -126,7 +126,7 @@
                             [class.is-invalid]="descripcionNoValida"
                             (change)="validarBotonSiguiente();">
                             </textarea>
-                            <small *ngIf="ciudadNoValida" class= "text-danger">Agregue una descripción</small>
+                            <small *ngIf="descripcionNoValida" class= "text-danger">Agregue una descripción</small>
                           </div>
                         </div> 
             <br>   
@@ -204,15 +204,14 @@
           
             <br>
 
-            <div class="form-group row" disabled>
+            <div class="form-group row">
               <label [ngStyle]="{'width':'27%'}">Total  <span class="text-danger font-weight-bold">*</span>
               </label>
-              <div [ngStyle]="{'width':'67%'}" *ngIf="val">   
-                <h3>
+              <div [ngStyle]="{'width':'67%'}" *ngIf="val"> 
                   <p *ngIf="moneda==1" >{{valTotal | currency: 'COP'}}</p>  
                   <p *ngIf="moneda==2" >{{valTotal | currency: 'PAB'}}</p>   
                   <p *ngIf="moneda==3" >{{valTotal | currency: 'CLP'}}</p>   
-                </h3>  
+                
               </div>
             </div> 
 
@@ -221,14 +220,17 @@
            
             <button type="submit" class="btn btn-primary mt-3 text-right" 
                     [disabled]="!this.botones.botonSiguiente2.estado"
-                    (click)="cambiarFlagCompra();" (ngSubmit)="cambiarFlagCompra()">Agregar +</button>
+                    (click)="cambiarFlagCompra();" (ngSubmit)="cambiarFlagCompra()">
+                    <i class="fa fa-plus"></i>
+                    Agregar 
+                </button>
 
 
             <br>
 
             <div class="row" *ngIf="verCompra">
               <div class="col">
-                <table class="table">
+                <table class="table" id="miTabla">
                   <thead class="thead-dark">
                     <th>Id</th>
                     <th>Descripción</th>
@@ -236,13 +238,18 @@
                     <th>Precio Unitario</th>
                     <th>Total</th>
                   </thead>
+                  <tfoot>
+                    <tr>
+                        <td colspan=3>Total</td>
+                    </tr>
+                </tfoot>
                   <tbody>
                     <tr *ngFor="let item of arrayPiezas; let i = index">
                       <td >{{i +1 }}</td>
                       <td >{{item.descripcionPieza}}</td>
                       <td >{{item.cantidad}}</td>
                       <td >{{item.precioUnitario}}</td>
-                      <td >{{item.total}}</td>
+                      <td >{{0}}</td>
                     </tr>                  
                   </tbody>
                 </table>
@@ -265,7 +272,8 @@
 
     <mat-step label="Resumen de la compra">
       <div class="col-5 mx-auto" [ngStyle]="{'width':'100%'}" class="row justify-content-center">
-        <form autocomplete="off" [formGroup]="forma2" [ngStyle]="{'width':'80%'}">
+        <form autocomplete="off" [formGroup]="forma3" [ngStyle]="{'width':'80%'}" *ngIf="!animacion">
+            
         
           <div class="form-group row">
             <strong class="row justify-content-center">---------------------------------------------------------------------------------------------------------------------------------------------------------</strong><br>
@@ -341,14 +349,22 @@
                 <button  mat-button matStepperPrevious class="btn btn-outline-primary btn-block btn-toolbar"> Atrás </button>
               </div>
               <div class="col-md-2">
-                <button class="btn btn-outline-primary btn-block btn-toolbar" (click)="guardarInf()"> Guardar </button>
-              </div>
+                <button class="btn btn-outline-primary btn-block btn-toolbar" (click)="guardarCompra()"> Guardar </button>
+              </div>              
         </div>
 
           </form>
+
+          <div class="alert alert-info text-center mt-3" *ngIf="animacion == true">
+            <h4 class="alert-heading">Guardando...</h4>
+            <p>
+                <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+            </p>
+            <p class="mb-0">Espere por favor...</p>
+
+          </div>
+
+     
         </div> 
     </mat-step>
-
-    
-
 </mat-horizontal-stepper>

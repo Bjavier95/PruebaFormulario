@@ -1,21 +1,22 @@
 export interface compraModel{
-    idPais;
-    nombre;
-    nit;
+    id: any;
+    idPais: any;
+    nombre: any;
+    nit: any;
     ubicaciones: ubicacionesModel[];
     piezas: piezasModel[];
-    total;
+    total: any;
 }
 
 export interface ubicacionesModel{
-    idDepartamento;
-    idCiudad;
+    idDepartamento: any;
+    idCiudad: any;
     direcciones: direccionesModel[]; 
 }
 
 export interface direccionesModel{
-    idTipoDireccion;
-    direccion;
+    idTipoDireccion: any;
+    direccion: any;
 }
 
 export interface piezasModel{

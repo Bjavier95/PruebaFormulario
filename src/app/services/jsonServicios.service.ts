@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { compraModel } from '../Models/compraModel.models';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,37 @@ import { compraModel } from '../Models/compraModel.models';
 export class jsonServicios {
 
   url = 'https://formtest-a7601-default-rtdb.firebaseio.com';
+  compra!: compraModel;
+
 
   constructor( private httpClient: HttpClient ) { 
+    this.compra = {
+      "id": "",
+      "idPais": "",
+      "nombre": "",
+      "nit": "",
+      "ubicaciones": [
+          {
+              "idDepartamento": "",
+              "idCiudad": "",
+              "direcciones": [
+                  {
+                      "idTipoDireccion": "",
+                      "direccion": ""
+                  }
+              ]           
+          },
+      ],
+      "piezas": [
+          {
+              "cantidad": "",
+              "descripcion": "",
+              "precioUnitario": "",
+              "total": ""
+          }
+      ],
+      "total": "" 
+    };
   }
 
   getPaisesService(url: string): Observable<any>{
@@ -30,6 +60,12 @@ export class jsonServicios {
   }
 
   guardarCompra(compra: compraModel){
-    return this.httpClient.post(`${this.url}/compras.json`, compra);
+    return this.httpClient.post(`${this.url}/compras.json`, compra)
+        .pipe(
+          map((resp: any) => {
+            console.log('resp: ', resp);
+            this.compra.id = resp.name;
+            return compra;
+        }));
   }
 }
