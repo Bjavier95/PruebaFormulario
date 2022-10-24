@@ -68,4 +68,19 @@ export class jsonServicios {
             return compra;
         }));
   }
+
+  actualizarCompra(compra: compraModel){
+    return this.httpClient.put(`${this.url}/compras/${compra.id}.json`, compra)
+        .pipe(
+          map((resp: any) => {
+            console.log('resp: ', resp);
+            this.compra.id = resp.name;
+            return compra;
+        }));
+  }
+
+  obtenerCompras(){
+    return this.httpClient.get(`${this.url}/compras.json`);
+  }
+
 }

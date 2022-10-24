@@ -9,6 +9,7 @@ import { jsonServicios } from '../../services/jsonServicios.service';
 import { compraModel } from '../../Models/compraModel.models';
 import { NgSwitchDefault } from '@angular/common';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -86,7 +87,8 @@ export class DatauserComponent implements OnInit {
   }
 
   constructor( private fb: FormBuilder,
-               private jsonServices : jsonServicios) { 
+               private jsonServices : jsonServicios,
+               public router: Router) { 
     this.createForm();
     this.createFormParts();
     this.createFormCompras();
@@ -462,11 +464,14 @@ guardarCompra(){
           timer: 3000,
           icon: 'success'
         });
+
+        setTimeout(() => {
+          this.router.navigateByUrl('home');
+        }, 1500);
+
       }, 3000);
     }
     console.log('resp: ', resp);
   })
-
-}
-
+ }
 }

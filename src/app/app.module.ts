@@ -14,6 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { jsonServicios } from './services/jsonServicios.service';
 import { CompraComponent } from './pages/compra/compra.component';
+import { NavbarComponent } from './pages/shared/navbar/navbar.component';
+import { HomeComponent } from './pages/home/home.component';
+import { HistorialComponent } from './pages/historial/historial.component';
 
 
 
@@ -24,6 +27,9 @@ import { CompraComponent } from './pages/compra/compra.component';
     LoginComponent,
     DatauserComponent,
     CompraComponent,
+    NavbarComponent,
+    HomeComponent,
+    HistorialComponent,
   ],
   imports: [
     BrowserModule,

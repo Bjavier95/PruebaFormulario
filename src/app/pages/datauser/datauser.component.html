@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <mat-horizontal-stepper>
     <mat-step label="Datos del usuario">
         <div [ngStyle]="{'width':'100%'}" class="row justify-content-center">
@@ -355,28 +356,13 @@
               </div>
               <div class="col-md-2">
                 <button class="btn btn-outline-primary btn-block btn-toolbar" (click)="guardarCompra()"> Guardar </button>
-              </div>              
-        </div>
-
-          </form>
-
-          <!-- <div class="alert alert-info text-center mt-3">
-            <h4 class="alert-heading">Guardando</h4>
-            <p>
-                <i class="fa fa-sync-alt fa-spin fa-2x"></i>
-            </p>
-            <p class="mb-0">Espere por favor...</p>
-          </div>
-
-          <div class="alert alert-info text-center mt-3">
-            <h4 class="alert-heading">Guardado</h4>
-            <p>
-                <i class="fa fa-check fa-2x"></i>
-            </p>
-            <p class="mb-0">Compra registrada con exito!</p>
-          </div> -->
-
-     
+              </div>   
+              
+              <!-- <div class="col-md-2">
+                <button class="btn btn-outline-primary btn-block btn-toolbar" (click)="obtenerCompras()"> mostrar compras </button>
+              </div>    -->
+            </div>
+          </form>     
         </div> 
     </mat-step>
 </mat-horizontal-stepper>
