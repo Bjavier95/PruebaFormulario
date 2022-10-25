@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -10,15 +11,17 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-              
+            
   constructor( public router: Router  ) {
     
     }
 
   ngOnInit(): void {
+    environment.guard = false;
   }
 
   login(){
+    environment.guard = true; 
     Swal.fire({
       title: 'Espere',
       text: 'Iniciando sesión...',
