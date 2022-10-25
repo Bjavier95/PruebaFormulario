@@ -1,5 +1,5 @@
 export interface compraModel{
-    id: any;
+    id: string;
     idPais: any;
     nombre: any;
     nit: any;

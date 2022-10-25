@@ -7,7 +7,6 @@ import { RespTipoDireccion } from '../../Models/respTipodirecciones.models';
 import { RespDepartamentos } from 'src/app/Models/respDepartamentos.models';
 import { jsonServicios } from '../../services/jsonServicios.service';
 import { compraModel } from '../../Models/compraModel.models';
-import { NgSwitchDefault } from '@angular/common';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 

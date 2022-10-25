@@ -80,7 +80,27 @@ export class jsonServicios {
   }
 
   obtenerCompras(){
-    return this.httpClient.get(`${this.url}/compras.json`);
+    return this.httpClient.get(`${this.url}/compras.json`)
+    .pipe(
+      map(this.crearArregloCompras)
+    );
+  }
+
+  private crearArregloCompras(comprasObj: Object){
+      const compras: compraModel[] = [];
+
+      Object.keys(comprasObj).forEach(key => {
+        const compra: compraModel = comprasObj[key];
+        compra.id = key;
+        compras.push(compra);
+      })
+      
+      
+      if(comprasObj === null ){return []; }
+
+      return compras;
+
+
   }
 
 }
