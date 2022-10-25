@@ -19,7 +19,7 @@ export class HistorialComponent implements OnInit {
  obtenerCompras(){
   this.jsonServices.obtenerCompras().subscribe(resp => {
     this.compras = resp;
-    console.log('compras: ', this.compras);
+    // console.log('compras: ', this.compras);
   });
  }
 

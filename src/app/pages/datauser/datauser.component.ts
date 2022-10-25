@@ -425,8 +425,8 @@ cambiarFlagCompra(){
 
 guardarCompra(){
   console.log('funcion guardarCompra');
-  console.log('Forma: ', this.forma.value);
-  console.log('Forma2: ', this.forma2.value);
+  // console.log('Forma: ', this.forma.value);
+  // console.log('Forma2: ', this.forma2.value);
 
 
   Swal.fire({
@@ -451,7 +451,7 @@ guardarCompra(){
   this.compra.total = 9000;
 
 
-  console.log('Compra: ', this.compra);
+  // console.log('Compra: ', this.compra);
 
 
   this.jsonServices.guardarCompra(this.compra).subscribe(resp => {
@@ -470,7 +470,7 @@ guardarCompra(){
 
       }, 3000);
     }
-    console.log('resp: ', resp);
+    // console.log('resp: ', resp);
   })
  }
 }

@@ -63,7 +63,7 @@ export class jsonServicios {
     return this.httpClient.post(`${this.url}/compras.json`, compra)
         .pipe(
           map((resp: any) => {
-            console.log('resp: ', resp);
+            // console.log('resp: ', resp);
             this.compra.id = resp.name;
             return compra;
         }));
@@ -73,7 +73,7 @@ export class jsonServicios {
     return this.httpClient.put(`${this.url}/compras/${compra.id}.json`, compra)
         .pipe(
           map((resp: any) => {
-            console.log('resp: ', resp);
+            // console.log('resp: ', resp);
             this.compra.id = resp.name;
             return compra;
         }));
